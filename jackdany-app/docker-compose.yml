@@ -7,8 +7,7 @@ services:
       APP_PORT: 3000
 
   server:
-    build: ./server
-    image: jackdany-app:latest
+    image: ghcr.io/danyx67800/jackdany-app:1.0.0
     restart: on-failure
     user: "1000:1000"
     init: true
