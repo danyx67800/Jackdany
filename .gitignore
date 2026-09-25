@@ -4,5 +4,9 @@ jackdany-app/server/data/db.json
 jackdany-app/server/data/uploads/
 mobile/.dart_tool/
 mobile/build/
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/android/.gradle/
+mobile/android/local.properties
 *.log
 /tmp/
