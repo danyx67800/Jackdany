@@ -1,1 +1,8 @@
 .DS_Store
+node_modules/
+jackdany-app/server/data/db.json
+jackdany-app/server/data/uploads/
+mobile/.dart_tool/
+mobile/build/
+*.log
+/tmp/

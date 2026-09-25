@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jack Dany — Admin</title>
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><img src="./logo.png" alt="JD" /><span>Jack Dany · CMS</span></div>
+  <div id="authBox">
+    <input id="user" placeholder="admin" autocomplete="username" />
+    <input id="pass" type="password" placeholder="password" autocomplete="current-password" />
+    <button id="loginBtn">Accedi</button>
+    <button id="logoutBtn" class="ghost hidden">Esci</button>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button data-tab="news" class="active">Notizie</button>
+  <button data-tab="secret">Sezione segreta</button>
+  <button data-tab="settings">Impostazioni</button>
+</nav>
+
+<main>
+  <section id="tab-news" class="tab">
+    <div class="card">
+      <h2>Nuova / modifica notizia</h2>
+      <input id="nTitle" placeholder="Titolo" />
+      <div class="row">
+        <select id="nCat">
+          <option value="tech">Tech</option>
+          <option value="spazio">Spazio</option>
+          <option value="aerei">Aerei</option>
+          <option value="f1">F1</option>
+        </select>
+        <input id="nImg" placeholder="URL immagine (opzionale)" />
+        <label class="check"><input type="checkbox" id="nPub" checked /> Pubblicata</label>
+      </div>
+      <input id="nExcerpt" placeholder="Estratto breve" />
+      <textarea id="nBody" rows="5" placeholder="Corpo della notizia (markdown/testo)"></textarea>
+      <div class="row">
+        <button id="saveNews">Salva</button>
+        <button id="resetNews" class="ghost">Pulisci</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Archivio</h2>
+      <div class="row">
+        <select id="filterCat">
+          <option value="">Tutte</option>
+          <option value="tech">Tech</option>
+          <option value="spazio">Spazio</option>
+          <option value="aerei">Aerei</option>
+          <option value="f1">F1</option>
+        </select>
+        <button id="reloadNews" class="ghost">Ricarica</button>
+      </div>
+      <div id="newsList" class="list"></div>
+    </div>
+  </section>
+
+  <section id="tab-secret" class="tab hidden">
+    <div class="card">
+      <h2>Foto segrete</h2>
+      <div class="row">
+        <input id="phTitle" placeholder="Titolo foto" />
+        <input id="phFile" type="file" accept="image/*" />
+        <button id="uploadPhoto">Carica</button>
+      </div>
+      <div id="photoList" class="grid"></div>
+    </div>
+    <div class="card">
+      <h2>Messaggi privati</h2>
+      <input id="mTitle" placeholder="Titolo messaggio" />
+      <textarea id="mBody" rows="4" placeholder="Testo riservato..."></textarea>
+      <button id="saveMsg">Salva messaggio</button>
+      <div id="msgList" class="list"></div>
+    </div>
+    <div class="card">
+      <h2>PIN sezione segreta</h2>
+      <div class="row">
+        <input id="newPin" placeholder="Nuovo PIN (min 4 cifre)" />
+        <button id="savePin">Aggiorna PIN</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-settings" class="tab hidden">
+    <div class="card">
+      <h2>Impostazioni app mobile</h2>
+      <label>Nome app<input id="sAppName" /></label>
+      <label>F1 provider<input id="sF1" placeholder="openf1" /></label>
+      <label>Maintenance mode
+        <select id="sMaint"><option value="false">false</option><option value="true">true</option></select>
+      </label>
+      <label>Password admin (cambio)
+        <input id="oldPass" type="password" placeholder="vecchia password" />
+        <input id="newPass" type="password" placeholder="nuova password (min 8)" />
+      </label>
+      <div class="row">
+        <button id="saveSettings">Salva impostazioni</button>
+        <button id="savePass" class="ghost">Cambia password</button>
+      </div>
+      <p id="setMsg" class="muted"></p>
+    </div>
+  </section>
+</main>
+
+<div id="toast"></div>
+<script src="./app.js"></script>
+</body>
+</html>

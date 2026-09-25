@@ -1,17 +1,43 @@
-## Umbrel Community App Store Template
+# Jack Dany — ecosistema mobile + Umbrel OS
 
-This repository is a template to create an Umbrel Community App Store. These additional app stores allow developers to distribute applications without submitting to the [Official Umbrel App Store](https://github.com/getumbrel/umbrel-apps).
+Mono-repo dell'ecosistema **Jack Dany**:
 
-## How to use:
+- `/mobile` — app Flutter (iOS + Android): notizie Tech/Spazio/Aerei/F1, dashboard F1 (OpenF1 + fallback Jolpica), Liquid Glass su iOS, splash con hero-animation del logo verso la top bar, easter egg a 5 tap sul logo con PIN/biometria.
+- `/jackdany-app` — app per **Umbrel OS** (Community App Store): backend Node.js/Express + store JSON + dashboard admin web. Gestisce notizie, impostazioni e sezione segreta (foto + messaggi + PIN). API REST per il mobile.
+- `umbrel-app-store.yml` — manifest del Community App Store (`jackdany`).
 
-1. Start by clicking the "Use this template" button located above.
-2. Assign an ID and name to your app store within the `umbrel-app-store.yml` file. This file specifies two important attributes:
-    - `id` - Acts as a unique prefix for every app within your Community App Store. You must start your application's ID with your app store's ID. For instance, in this template, the app store ID is `sparkles`, and there's an app named `hello world`. Consequently, the app's ID should be: `sparkles-hello-world`.
-    - `name` - This is the name of the Community App Store displayed in the umbrelOS UI.
-3. Change the name of the `sparkles-hello-world` folder to match your app's ID. The app ID is for you to decide. For example, if your app store ID is `whistles`, and your app is named My Video Downloader, you could set its app ID to `whistles-my-video-downloader`, and rename the folder accordingly.
-4. Next, enter your app's listing details in the `whistles-my-video-downloader/umbrel-app.yml`. These are displayed in the umbrelOS UI.
-5. Include the necessary Docker services in `whistles-my-video-downloader/docker-compose.yml`.
-6. That's it! Your Community App Store, featuring your unique app, is now set up and ready to go. To use your Community App Store, you can add its GitHub url the umbrelOS user interface as shown in the following demo:
+## Scelte architetturali
 
+| Decisione | Scelta | Motivo |
+|---|---|---|
+| Mobile | **Flutter** | 60/120fps, singola codebase, `BackdropFilter` = Liquid Glass nativo su iOS, Hero animation built-in |
+| Backend | **Node.js/Express + JSON store** | zero dipendenze native (funziona su RPi/ARM senza build), singolo container leggero |
+| DB | file `db.json` su volume persistente `${APP_DATA_DIR}` | backup = copia file; niente Postgres da mantenere su home server |
+| F1 live | **OpenF1** primario, **Jolpica/Ergast** fallback | OpenF1 gratuito senza key (storico dal 2023); realtime a pagamento — fallback gratuito |
+| Auth | JWT admin (12h) + secret JWT (24h via PIN) | mobile legge news pubbliche senza auth; segreta solo con PIN |
 
-https://user-images.githubusercontent.com/10330103/197889452-e5cd7e96-3233-4a09-b475-94b754adc7a3.mp4
+## Quickstart — Backend (locale, senza Umbrel)
+
+```bash
+cd jackdany-app/server
+npm install
+DATA_DIR=./data PORT=3000 node src/index.js
+# Dashboard: http://localhost:3000/admin/  (admin / jackdany-admin — cambia subito!)
+# Health:    http://localhost:3000/api/health
+```
+
+## Quickstart — Mobile
+
+```bash
+cd mobile
+flutter pub get
+flutter run  # imposta il backend in Impostazioni: http://umbrel.local:3000 o IP Tailscale
+```
+
+## Deploy su Umbrel OS
+
+1. Su umbrelOS: App Store → ⋯ → *Add Community App Store* → `https://github.com/danyx67800/Jackdany`
+2. Installa **Jack Dany Backend**, apri la dashboard e cambia password + PIN.
+3. Nell'app mobile → Impostazioni → inserisci l'URL del backend (IP locale / Tailscale / HTTPS).
+
+Dettagli: `docs/ARCHITECTURE.md`, API: `docs/API.md`.

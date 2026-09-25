@@ -1,0 +1,34 @@
+manifestVersion: 1
+id: jackdany-app
+name: Jack Dany Backend
+tagline: CMS + API per l'app mobile Jack Dany (news, F1, sezione segreta)
+icon: https://raw.githubusercontent.com/danyx67800/Jackdany/master/jackdany-app/icon.png
+category: Media
+version: "1.0.0"
+port: 3000
+description: >-
+  Backend e dashboard admin per Jack Dany.
+
+
+  Gestisce notizie Tech / Spazio / Aerei / F1, impostazioni generali
+  dell'app mobile e la sezione segreta (foto + messaggi privati).
+
+
+  Espone API REST sicure per l'app Flutter e una dashboard web
+  per l'amministratore. Dati persistenti in SQLite su volume Umbrel.
+
+developer: Jack Dany
+website: https://github.com/danyx67800/Jackdany
+submitter: Jack Dany
+submission: https://github.com/danyx67800/Jackdany
+repo: https://github.com/danyx67800/Jackdany
+support: https://github.com/danyx67800/Jackdany/issues
+gallery:
+  - https://raw.githubusercontent.com/danyx67800/Jackdany/master/jackdany-app/icon.png
+releaseNotes: >-
+  v1.0.0: prima release — CRUD notizie, impostazioni, sezione segreta,
+  auth JWT + PIN, upload foto, dashboard admin, API mobile.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
